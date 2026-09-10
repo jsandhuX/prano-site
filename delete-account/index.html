@@ -113,7 +113,7 @@ happens when you follow it, so nobody can delete your account just by knowing yo
 <div id="status" class="status" style="display:none"></div>
 
 <p class="hint" style="margin-top:28px">Prefer to do it by email? Write to
-<a href="mailto:privacy@pranoapp.com">privacy@pranoapp.com</a> from the address on your account
+<a href="mailto:contact@anantex.com">contact@anantex.com</a> from the address on your account
 and we will handle it within 30 days.</p>
 
 <script>
@@ -138,7 +138,7 @@ and we will handle it within 30 days.</p>
       return;
     }
     if (ENDPOINT.indexOf('__') === 0) {
-      show('err', 'This form is not connected yet. Email privacy@pranoapp.com and we will delete your account manually.');
+      show('err', 'This form is not connected yet. Email contact@anantex.com and we will delete your account manually.');
       return;
     }
     button.disabled = true;
@@ -156,7 +156,7 @@ and we will handle it within 30 days.</p>
       .catch(function () {
         button.disabled = false;
         button.textContent = 'Send confirmation link';
-        show('err', 'Something went wrong. Email privacy@pranoapp.com and we will handle it by hand.');
+        show('err', 'Something went wrong. Email contact@anantex.com and we will handle it by hand.');
       });
   });
 })();
