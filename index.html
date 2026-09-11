@@ -29,7 +29,7 @@
 <link rel="preload" href="/assets/fonts/outfit-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/assets/fonts/fraunces-latin.woff2" as="font" type="font/woff2" crossorigin>
 <script>document.documentElement.classList.add('js')</script>
-<script type="application/ld+json">[{"@context":"https://schema.org","@type":"Organization","@id":"https://pranoapp.com/#org","name":"Sandhu Technologies LLC","alternateName":"Anantex","url":"https://pranoapp.com/","email":"contact@anantex.com","logo":"https://pranoapp.com/assets/icon-512.png"},{"@context":"https://schema.org","@type":"WebSite","@id":"https://pranoapp.com/#website","name":"Prano","url":"https://pranoapp.com/","publisher":{"@id":"https://pranoapp.com/#org"}},{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Prano: AI Food Scanner","alternateName":"Prano","url":"https://pranoapp.com/","applicationCategory":"HealthApplication","operatingSystem":"iOS","description":"Scan a barcode, label, plate or menu and get a 0–100 food score personalised to your goals, allergies and conditions, with a plain-English explanation and a better swap.","image":"https://pranoapp.com/assets/og/og-home.jpg","publisher":{"@id":"https://pranoapp.com/#org"},"offers":[{"@type":"Offer","name":"Free","price":"0","priceCurrency":"USD"},{"@type":"Offer","name":"Prano Pro — Monthly","price":"7.99","priceCurrency":"USD"},{"@type":"Offer","name":"Prano Pro — Yearly","price":"59.99","priceCurrency":"USD"}]}]</script>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"Organization","@id":"https://pranoapp.com/#org","name":"Sandhu Technologies LLC","alternateName":"Anantex","url":"https://pranoapp.com/","email":"support@pranoapp.com","logo":"https://pranoapp.com/assets/icon-512.png"},{"@context":"https://schema.org","@type":"WebSite","@id":"https://pranoapp.com/#website","name":"Prano","url":"https://pranoapp.com/","publisher":{"@id":"https://pranoapp.com/#org"}},{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Prano: AI Food Scanner","alternateName":"Prano","url":"https://pranoapp.com/","applicationCategory":"HealthApplication","operatingSystem":"iOS","description":"Scan a barcode, label, plate or menu and get a 0–100 food score personalised to your goals, allergies and conditions, with a plain-English explanation and a better swap.","image":"https://pranoapp.com/assets/og/og-home.jpg","publisher":{"@id":"https://pranoapp.com/#org"},"offers":[{"@type":"Offer","name":"Free","price":"0","priceCurrency":"USD"},{"@type":"Offer","name":"Prano Pro — Monthly","price":"7.99","priceCurrency":"USD"},{"@type":"Offer","name":"Prano Pro — Yearly","price":"59.99","priceCurrency":"USD"}]}]</script>
 <style>
 @font-face{font-family:'Fraunces';font-style:normal;font-weight:400 900;font-display:swap;src:url(/assets/fonts/fraunces-latin.woff2) format('woff2')}
 @font-face{font-family:'Outfit';font-style:normal;font-weight:100 900;font-display:swap;src:url(/assets/fonts/outfit-latin.woff2) format('woff2')}
@@ -645,7 +645,7 @@ footer{background:#070D09;color:rgba(255,255,255,.66);padding:70px 0 40px;font-s
       <button type="submit" id="nbtn">Notify me</button>
     </form>
     <div class="fmsg" id="fmsg" role="status" aria-live="polite"></div>
-    <p class="fnote">Used once, for the launch email, and deleted within 12 months of launch. Never sold. To be removed, email <a href="mailto:contact@anantex.com">contact@anantex.com</a>.</p>
+    <p class="fnote">Used once, for the launch email, and deleted within 12 months of launch. Never sold. To be removed, email <a href="mailto:privacy@pranoapp.com">privacy@pranoapp.com</a>.</p>
   </div></div>
 </section>
 
@@ -666,7 +666,7 @@ footer{background:#070D09;color:rgba(255,255,255,.66);padding:70px 0 40px;font-s
       </div>
       <div><h2 class="fh">Product</h2><a href="#how">How it works</a><a href="#score">The score</a><a href="#features">Features</a><a href="#pricing">Pricing</a><a href="/app/">Get the app</a></div>
       <div><h2 class="fh">Company</h2><a href="/support/">Support</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a><a href="/delete-account/">Delete account</a></div>
-      <div><h2 class="fh">Contact</h2><a href="mailto:contact@anantex.com">contact@anantex.com</a></div>
+      <div><h2 class="fh">Contact</h2><a href="mailto:support@pranoapp.com">support@pranoapp.com</a><a href="mailto:privacy@pranoapp.com">privacy@pranoapp.com</a></div>
     </div>
     <div class="fbot">
       <span>© 2026 Sandhu Technologies LLC. All rights reserved.</span>
@@ -779,7 +779,7 @@ document.querySelectorAll('.step').forEach(s=>stO.observe(s));
     fetch(FORM,{method:'POST',mode:'no-cors',body})
       .then(()=>{say(true,'Thanks — we will email '+v+' the day Prano lands.');inp.value='';btn.textContent='On the list';})
       .catch(()=>{btn.disabled=false;btn.textContent='Notify me';
-        m.style.color='#EE8C7B';m.innerHTML='That did not go through. Email <a href="mailto:contact@anantex.com?subject=Prano%20launch%20list">contact@anantex.com</a> and we will add you.';});
+        m.style.color='#EE8C7B';m.innerHTML='That did not go through. Email <a href="mailto:support@pranoapp.com?subject=Prano%20launch%20list">support@pranoapp.com</a> and we will add you.';});
   });
 })();
 </script>
