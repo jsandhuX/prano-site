@@ -29,6 +29,12 @@
 <link rel="preload" href="/assets/fonts/outfit-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/assets/fonts/fraunces-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/assets/site.css">
+<style>
+.card.confirm{border:1.5px solid #E1ADA3;background:#fff;margin-top:0}
+.card.confirm h2{margin-top:0}
+#confirm-h:focus{outline:none}
+.btn.danger{background:linear-gradient(120deg,#B0402E,#8E2F20);box-shadow:0 10px 28px -12px rgba(176,64,46,.8)}
+</style>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -47,6 +53,15 @@ cannot be undone.</p>
   </div>
 </header>
 <main id="main" class="wrap prose">
+<div class="card confirm" id="confirm" hidden>
+  <h2 id="confirm-h" tabindex="-1">Confirm deletion</h2>
+  <p>Pressing the button below permanently deletes your Prano account and everything listed on
+  this page under <em>What gets deleted</em>. It cannot be undone.</p>
+  <p><strong>Subscribed to Prano Pro?</strong> Deleting your account does not cancel it. Cancel it
+  first in iPhone Settings → your name → Subscriptions, or you will keep being charged.</p>
+  <p style="margin:22px 0 0"><button class="btn danger" type="button" id="confirm-btn">Delete my account</button></p>
+  <div id="cstatus" class="status" role="status" aria-live="polite" hidden></div>
+</div>
 <p>If you still have Prano installed, the fastest route is in the app: <strong>Profile →
 Delete account</strong>. This page is for when you no longer have it installed.</p>
 
@@ -73,7 +88,7 @@ Delete account</strong>. This page is for when you no longer have it installed.<
 <p>Enter the email address on your account. We will send a confirmation link — the deletion
 happens when you follow it, so nobody can delete your account just by knowing your address.</p>
 
-<div class="card">
+<div class="card" id="request-card">
 <form id="delete-form" novalidate>
   <label for="email">Email address on your Prano account</label>
   <input type="email" id="email" name="email" required autocomplete="email" inputmode="email"
@@ -106,63 +121,110 @@ and we will handle it within 30 days.</p>
       <div><h2 class="fh">Contact</h2><a href="mailto:contact@anantex.com">contact@anantex.com</a></div>
     </div>
     <div class="fbot">
-      <span>© 2026 Anantex. All rights reserved.</span>
+      <span>© 2026 Sandhu Technologies LLC. All rights reserved.</span>
       <span>Apple and App Store are trademarks of Apple Inc.</span>
     </div>
   </div>
 </footer>
 <script>
 (function () {
-  // The Supabase Edge Function URL published by the app session in
-  // claude/store-submission/open-items-for-J.md. Until then the form falls back to email.
-  var ENDPOINT = '__DELETE_ENDPOINT__';
+  // Supabase Edge Function published by the app session (open-items-for-J.md, "Handoff").
+  var ENDPOINT = 'https://valfqzkrakixqhvgcgcq.supabase.co/functions/v1/delete-account';
+  var MAIL_TO = 'contact@anantex.com';
+  var MAIL = 'mailto:' + MAIL_TO + '?subject=' + encodeURIComponent('Delete my Prano account');
+
   var form = document.getElementById('delete-form');
   var status = document.getElementById('status');
   var button = document.getElementById('submit');
-  var MAIL = 'mailto:contact@anantex.com?subject=' + encodeURIComponent('Delete my Prano account');
+  var confirmCard = document.getElementById('confirm');
+  var confirmBtn = document.getElementById('confirm-btn');
+  var cstatus = document.getElementById('cstatus');
 
-  function show(kind, message, link) {
-    status.className = 'status ' + kind;
-    status.textContent = message;
-    if (link) {
+  function show(el, kind, message, withMail) {
+    el.className = 'status ' + kind;
+    el.textContent = message;
+    if (withMail) {
       var a = document.createElement('a');
-      a.href = MAIL; a.textContent = 'contact@anantex.com';
-      status.appendChild(document.createTextNode(' '));
-      status.appendChild(a);
+      a.href = MAIL; a.textContent = MAIL_TO;
+      el.appendChild(document.createTextNode(' '));
+      el.appendChild(a);
     }
-    status.hidden = false;
+    el.hidden = false;
+  }
+  function post(body) {
+    return fetch(ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body)
+    }).then(function (r) {
+      return r.json().catch(function () { return {}; }).then(function (j) { return { status: r.status, body: j }; });
+    });
+  }
+  function msg(res, fallback) {
+    return (res.body && (res.body.message || (res.body.error && res.body.error.message))) || fallback;
+  }
+  function clearToken() {
+    if (history.replaceState) history.replaceState(null, '', location.pathname + location.search);
   }
 
+  // Step 1: request a confirmation link
   form.addEventListener('submit', function (event) {
     event.preventDefault();
     var email = document.getElementById('email').value.trim();
     if (!email || !/^[^@\s]+@[^@\s]+\.[^@\s]{2,}$/.test(email)) {
-      show('err', 'Enter the email address on your account.');
+      show(status, 'err', 'Enter the email address on your account.');
       document.getElementById('email').focus();
-      return;
-    }
-    if (ENDPOINT.indexOf('__') === 0) {
-      show('err', 'This form is not connected yet. Email us from the address on your account and we will delete it by hand:', true);
       return;
     }
     button.disabled = true;
     button.textContent = 'Sending…';
-    fetch(ENDPOINT, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email: email })
-    })
-      .then(function (r) { if (!r.ok) throw r; })
-      .then(function () {
-        form.hidden = true;
-        show('ok', 'Check your inbox. If an account exists for ' + email + ', we have sent a link that completes the deletion. The link expires in 24 hours.');
+    post({ action: 'request', email: email })
+      .then(function (res) {
+        if (res.status === 202 || (res.status >= 200 && res.status < 300)) {
+          form.hidden = true;
+          show(status, 'ok', msg(res, "If there's a Prano account for that address, we've emailed it a link to confirm deletion."));
+        } else if (res.status === 400) {
+          button.disabled = false; button.textContent = 'Send confirmation link';
+          show(status, 'err', msg(res, 'Enter a valid email address.'));
+        } else { throw res; }
       })
       .catch(function () {
         button.disabled = false;
         button.textContent = 'Send confirmation link';
-        show('err', 'Something went wrong. Email us and we will handle it by hand:', true);
+        show(status, 'err', 'Something went wrong on our side. Try again in a minute, or email us from the address on your account:', true);
       });
   });
+
+  // Step 2: the emailed link lands here with #token=… (a fragment, so it never reaches a server log)
+  var m = location.hash.match(/(?:^#|&)token=([^&]+)/);
+  if (m) {
+    var token = decodeURIComponent(m[1]);
+    confirmCard.hidden = false;
+    document.getElementById('confirm-h').focus();
+    // Only on an explicit press — mail scanners pre-fetch links, so never on page load.
+    confirmBtn.addEventListener('click', function () {
+      confirmBtn.disabled = true;
+      confirmBtn.textContent = 'Deleting…';
+      post({ action: 'confirm', token: token })
+        .then(function (res) {
+          if (res.status === 200) {
+            confirmBtn.hidden = true;
+            show(cstatus, 'ok', msg(res, 'Your Prano account and its data have been permanently deleted.'));
+            clearToken();
+            document.getElementById('request-card').hidden = true;
+          } else if (res.status === 410) {
+            confirmBtn.hidden = true;
+            show(cstatus, 'err', msg(res, 'This link is invalid or has expired. Request a new one below.'));
+            clearToken();
+          } else { throw res; }
+        })
+        .catch(function () {
+          confirmBtn.disabled = false;
+          confirmBtn.textContent = 'Delete my account';
+          show(cstatus, 'err', 'Something went wrong on our side. Please try again in a minute.');
+        });
+    });
+  }
 })();
 </script>
 <!-- Cloudflare Web Analytics: cookieless, no personal data -->
