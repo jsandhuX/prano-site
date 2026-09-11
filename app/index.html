@@ -88,7 +88,7 @@ main.prose.appmain{max-width:1100px}
         <div class="hp" aria-hidden="true"><label for="aweb">Leave this empty</label><input type="text" id="aweb" name="website" tabindex="-1" autocomplete="off"></div>
       </form>
       <div id="amsg" class="status" role="status" aria-live="polite" hidden></div>
-      <p class="hint">Used once, for the launch email, and deleted within 12 months of launch. Never sold. To be removed, email <a href="mailto:contact@anantex.com">contact@anantex.com</a>.</p>
+      <p class="hint">Used once, for the launch email, and deleted within 12 months of launch. Never sold. To be removed, email <a href="mailto:privacy@pranoapp.com">privacy@pranoapp.com</a>.</p>
     </div>
   </div>
 </div>
@@ -107,7 +107,7 @@ main.prose.appmain{max-width:1100px}
       </div>
       <div><h2 class="fh">Product</h2><a href="/#how">How it works</a><a href="/#score">The score</a><a href="/#features">Features</a><a href="/#pricing">Pricing</a><a href="/app/">Get the app</a></div>
       <div><h2 class="fh">Company</h2><a href="/support/">Support</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a><a href="/delete-account/">Delete account</a></div>
-      <div><h2 class="fh">Contact</h2><a href="mailto:contact@anantex.com">contact@anantex.com</a></div>
+      <div><h2 class="fh">Contact</h2><a href="mailto:support@pranoapp.com">support@pranoapp.com</a><a href="mailto:privacy@pranoapp.com">privacy@pranoapp.com</a></div>
     </div>
     <div class="fbot">
       <span>© 2026 Sandhu Technologies LLC. All rights reserved.</span>
@@ -140,7 +140,7 @@ main.prose.appmain{max-width:1100px}
     var body = new URLSearchParams(); body.append('entry.1635514352', v); body.append('entry.644941768', 'app-page' + (q.get('utm_source') ? ':' + q.get('utm_source').slice(0, 40) : ''));
     fetch(FORM, { method: 'POST', mode: 'no-cors', body: body })
       .then(function () { say('ok', 'Thanks — we will email ' + v + ' the day Prano lands.'); inp.value = ''; btn.textContent = 'On the list'; })
-      .catch(function () { btn.disabled = false; btn.textContent = 'Notify me'; say('err', 'That did not go through. Email contact@anantex.com and we will add you.'); });
+      .catch(function () { btn.disabled = false; btn.textContent = 'Notify me'; say('err', 'That did not go through. Email support@pranoapp.com and we will add you.'); });
   });
 })();
 </script>
