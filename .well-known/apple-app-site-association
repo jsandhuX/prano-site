@@ -1,0 +1,20 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": [
+          "CTU476UHAW.com.sandhutechnologies.prano"
+        ],
+        "components": [
+          {
+            "/": "/app",
+            "comment": "Get-the-app page opens Prano when installed"
+          },
+          {
+            "/": "/app/*"
+          }
+        ]
+      }
+    ]
+  }
+}
