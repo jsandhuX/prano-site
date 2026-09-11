@@ -101,7 +101,7 @@ happens when you follow it, so nobody can delete your account just by knowing yo
 </div>
 
 <p class="hint" style="margin-top:28px">Prefer to do it by email? Write to
-<a href="mailto:contact@anantex.com">contact@anantex.com</a> from the address on your account
+<a href="mailto:privacy@pranoapp.com">privacy@pranoapp.com</a> from the address on your account
 and we will handle it within 30 days.</p>
 </main>
 <footer>
@@ -118,7 +118,7 @@ and we will handle it within 30 days.</p>
       </div>
       <div><h2 class="fh">Product</h2><a href="/#how">How it works</a><a href="/#score">The score</a><a href="/#features">Features</a><a href="/#pricing">Pricing</a><a href="/app/">Get the app</a></div>
       <div><h2 class="fh">Company</h2><a href="/support/">Support</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a><a href="/delete-account/">Delete account</a></div>
-      <div><h2 class="fh">Contact</h2><a href="mailto:contact@anantex.com">contact@anantex.com</a></div>
+      <div><h2 class="fh">Contact</h2><a href="mailto:support@pranoapp.com">support@pranoapp.com</a><a href="mailto:privacy@pranoapp.com">privacy@pranoapp.com</a></div>
     </div>
     <div class="fbot">
       <span>© 2026 Sandhu Technologies LLC. All rights reserved.</span>
@@ -130,7 +130,7 @@ and we will handle it within 30 days.</p>
 (function () {
   // Supabase Edge Function published by the app session (open-items-for-J.md, "Handoff").
   var ENDPOINT = 'https://valfqzkrakixqhvgcgcq.supabase.co/functions/v1/delete-account';
-  var MAIL_TO = 'contact@anantex.com';
+  var MAIL_TO = 'privacy@pranoapp.com';
   var MAIL = 'mailto:' + MAIL_TO + '?subject=' + encodeURIComponent('Delete my Prano account');
 
   var form = document.getElementById('delete-form');
@@ -196,11 +196,17 @@ and we will handle it within 30 days.</p>
   });
 
   // Step 2: the emailed link lands here with #token=… (a fragment, so it never reaches a server log)
-  var m = location.hash.match(/(?:^#|&)token=([^&]+)/);
-  if (m) {
-    var token = decodeURIComponent(m[1]);
+  var token = null, wired = false;
+  function readToken() {
+    var m = location.hash.match(/(?:^#|&)token=([^&]+)/);
+    if (!m) return;
+    token = decodeURIComponent(m[1]);
     confirmCard.hidden = false;
+    confirmBtn.hidden = false; confirmBtn.disabled = false; confirmBtn.textContent = 'Delete my account';
+    cstatus.hidden = true;
     document.getElementById('confirm-h').focus();
+    if (wired) return;
+    wired = true;
     // Only on an explicit press — mail scanners pre-fetch links, so never on page load.
     confirmBtn.addEventListener('click', function () {
       confirmBtn.disabled = true;
@@ -225,6 +231,8 @@ and we will handle it within 30 days.</p>
         });
     });
   }
+  readToken();
+  window.addEventListener('hashchange', readToken);
 })();
 </script>
 <!-- Cloudflare Web Analytics: cookieless, no personal data -->
