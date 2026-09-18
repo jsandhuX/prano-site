@@ -175,7 +175,7 @@ body.locked{overflow:hidden}
 @media (max-width:400px){
   .wrap{padding:0 14px}
   .snav .wrap{gap:10px}
-  .lock small{display:none}
+  .lock small{font-size:7.5px;letter-spacing:.18em}
   .lock b{font-size:18px}
   .lock img{height:28px}
   .ncta{padding:10px 14px;font-size:13px}
@@ -186,4 +186,6 @@ body.locked{overflow:hidden}
 @media (max-width:820px){
   .burger{display:flex}
   .nlinks{display:none}
+  .snav .wrap{justify-content:flex-start}
+  .lock{margin-right:auto}
 }
