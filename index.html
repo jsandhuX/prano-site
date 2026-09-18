@@ -29,7 +29,7 @@
 <link rel="preload" href="/assets/fonts/outfit-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/assets/fonts/fraunces-latin.woff2" as="font" type="font/woff2" crossorigin>
 <script>document.documentElement.classList.add('js')</script>
-<script type="application/ld+json">[{"@context":"https://schema.org","@type":"Organization","@id":"https://pranoapp.com/#org","name":"Sandhu Technologies LLC","alternateName":"Anantex","url":"https://pranoapp.com/","email":"support@pranoapp.com","logo":"https://pranoapp.com/assets/icon-512.png"},{"@context":"https://schema.org","@type":"WebSite","@id":"https://pranoapp.com/#website","name":"Prano","url":"https://pranoapp.com/","publisher":{"@id":"https://pranoapp.com/#org"}},{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Prano: AI Food Scanner","alternateName":"Prano","url":"https://pranoapp.com/","applicationCategory":"HealthApplication","operatingSystem":"iOS","description":"Scan a barcode, label, plate or menu and get a 0–100 food score personalised to your goals, allergies and conditions, with a plain-English explanation and a better swap.","image":"https://pranoapp.com/assets/og/og-home.jpg","publisher":{"@id":"https://pranoapp.com/#org"},"offers":[{"@type":"Offer","name":"Free","price":"0","priceCurrency":"USD"},{"@type":"Offer","name":"Prano Pro — Monthly","price":"7.99","priceCurrency":"USD"},{"@type":"Offer","name":"Prano Pro — Yearly","price":"59.99","priceCurrency":"USD"}]}]</script>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"Organization","@id":"https://pranoapp.com/#org","name":"Anantex","legalName":"Sandhu Technologies LLC","url":"https://pranoapp.com/","email":"support@pranoapp.com","logo":"https://pranoapp.com/assets/icon-512.png"},{"@context":"https://schema.org","@type":"WebSite","@id":"https://pranoapp.com/#website","name":"Prano","url":"https://pranoapp.com/","publisher":{"@id":"https://pranoapp.com/#org"}},{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Prano: AI Food Scanner","alternateName":"Prano","url":"https://pranoapp.com/","applicationCategory":"HealthApplication","operatingSystem":"iOS","description":"Scan a barcode, label, plate or menu and get a 0–100 food score personalised to your goals, allergies and conditions, with a plain-English explanation and a better swap.","image":"https://pranoapp.com/assets/og/og-home.jpg","publisher":{"@id":"https://pranoapp.com/#org"},"offers":[{"@type":"Offer","name":"Free","price":"0","priceCurrency":"USD"},{"@type":"Offer","name":"Prano Pro — Monthly","price":"7.99","priceCurrency":"USD"},{"@type":"Offer","name":"Prano Pro — Yearly","price":"59.99","priceCurrency":"USD"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is it really free?","acceptedAnswer":{"@type":"Answer","text":"Scanning, the full personalised score and allergen flagging cost nothing, and there is no card to enter. Prano Pro — $7.99 a month or $59.99 a year, with a 7-day free trial — lifts the 15-a-day limit on Ask Prano questions and unlocks your full history and deeper analytics."}},{"@type":"Question","name":"What makes the score mine rather than generic?","acceptedAnswer":{"@type":"Answer","text":"You tell Prano your goals, allergies, conditions and dietary style once. They are inputs to the arithmetic, not a disclaimer underneath it. The same jar of sauce can score 78 for one person and 31 for another, and Prano shows you exactly which input moved it."}},{"@type":"Question","name":"Does it work on restaurant food, not just packets?","acceptedAnswer":{"@type":"Answer","text":"Yes. Barcode, nutrition label, a home-cooked plate or a printed menu — Prano reads all four, and tells you what it could not see rather than guessing quietly."}},{"@type":"Question","name":"Can I trust the number?","acceptedAnswer":{"@type":"Answer","text":"It is computed the same way every time from what the label actually says, and it can be explained line by line. Where a value is not declared, Prano estimates it, says so, and lowers its own confidence. The AI writes the explanation underneath; it never moves the number."}},{"@type":"Question","name":"Can I rely on it for allergies?","acceptedAnswer":{"@type":"Answer","text":"No — and we would rather say so plainly. Prano flags allergens it can find on the label, but a label can be wrong and cross-contamination is not on the label at all. Always check the pack yourself."}},{"@type":"Question","name":"What happens to my data?","acceptedAnswer":{"@type":"Answer","text":"Your scans, photos and conversations are yours. We do not sell personal information and we do not use your content to train third-party AI models. You can delete a single scan, or your whole account, from inside the app or at pranoapp.com/delete-account."}},{"@type":"Question","name":"When does it launch?","acceptedAnswer":{"@type":"Answer","text":"iPhone first. Leave your email below and you get one message the day it lands — no newsletter, no drip campaign."}}]}]</script>
 <style>
 @font-face{font-family:'Fraunces';font-style:normal;font-weight:400 900;font-display:swap;src:url(/assets/fonts/fraunces-latin.woff2) format('woff2')}
 @font-face{font-family:'Outfit';font-style:normal;font-weight:100 900;font-display:swap;src:url(/assets/fonts/outfit-latin.woff2) format('woff2')}
@@ -275,6 +275,80 @@ footer{background:#070D09;color:rgba(255,255,255,.66);padding:70px 0 40px;font-s
   display:flex;flex-wrap:wrap;gap:10px 22px;justify-content:space-between;font-size:13px;color:rgba(255,255,255,.58)}
 
 
+
+/* ---------- mobile menu ---------- */
+.burger{display:none;position:relative;z-index:95;width:44px;height:44px;border:0;background:transparent;cursor:pointer;
+  align-items:center;justify-content:center;flex-direction:column;gap:5px;border-radius:12px}
+.burger span{display:block;width:22px;height:2px;background:#fff;border-radius:2px;transition:transform .3s,opacity .2s}
+nav.stuck .burger span{background:var(--green)}
+.burger[aria-expanded="true"] span{background:#fff}
+.burger[aria-expanded="true"] span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.burger[aria-expanded="true"] span:nth-child(2){opacity:0}
+.burger[aria-expanded="true"] span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+nav.menuopen{background:transparent!important;box-shadow:none!important;z-index:100}
+nav.menuopen .lock b{color:#fff!important}nav.menuopen .lock small{color:rgba(255,255,255,.6)!important}
+nav.menuopen .burger span{background:#fff!important}
+nav.menuopen .ncta{display:none}
+.mnav[hidden]{display:none}
+.mnav{position:fixed;inset:0;z-index:90;background:linear-gradient(165deg,#0A120D,#123021 52%,#12303C);
+  padding:100px 30px 40px;display:flex;flex-direction:column;overflow-y:auto}
+.mnav a{color:#fff;font-family:'Fraunces',Georgia,serif;font-weight:700;letter-spacing:-.02em;font-size:30px;
+  padding:14px 0;border-bottom:1px solid rgba(255,255,255,.1)}
+.mnav a small{display:block;font-family:'Outfit',sans-serif;font-weight:400;font-size:13.5px;letter-spacing:0;
+  color:rgba(255,255,255,.55);margin-top:3px}
+.mnav .mcta{margin-top:26px;border:0;text-align:center;background:linear-gradient(120deg,#4D8A3A,var(--green));
+  border-radius:14px;font-size:17px;font-family:'Outfit',sans-serif;font-weight:600;padding:16px}
+.mnav .mfoot{margin-top:auto;padding-top:26px;font-size:13.5px;color:rgba(255,255,255,.45)}
+.mnav .mfoot a{font-family:'Outfit',sans-serif;font-size:13.5px;font-weight:500;border:0;padding:0;display:inline;
+  color:rgba(255,255,255,.7);text-decoration:underline}
+body.locked{overflow:hidden}
+
+/* ---------- screenshots ---------- */
+.shots{background:linear-gradient(180deg,var(--paper),var(--paper-2))}
+.shotgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:44px 34px}
+.shot{margin:0}
+.frame{background:linear-gradient(160deg,#39404E,#14161E);border-radius:40px;padding:9px;
+  box-shadow:0 40px 70px -34px rgba(12,24,16,.75),0 0 0 1px rgba(255,255,255,.09) inset;
+  transition:transform .35s ease}
+.shot:hover .frame{transform:translateY(-6px)}
+.frame img{display:block;width:100%;height:auto;border-radius:32px}
+.shot figcaption{margin-top:20px}
+.shot figcaption b{display:block;font-family:'Fraunces',Georgia,serif;font-weight:700;font-size:20px;letter-spacing:-.02em}
+.shot figcaption span{display:block;margin-top:5px;font-size:15.5px;line-height:1.55;color:var(--mut)}
+
+/* ---------- faq ---------- */
+.faqlist{max-width:820px;border-top:1px solid var(--line)}
+.faqlist details{border-bottom:1px solid var(--line)}
+.faqlist summary{list-style:none;cursor:pointer;padding:22px 44px 22px 0;position:relative;
+  font-family:'Fraunces',Georgia,serif;font-weight:700;font-size:20px;letter-spacing:-.02em;line-height:1.35}
+.faqlist summary::-webkit-details-marker{display:none}
+.faqlist summary:after{content:'';position:absolute;right:8px;top:30px;width:11px;height:11px;
+  border-right:2px solid var(--green);border-bottom:2px solid var(--green);transform:rotate(45deg);transition:transform .25s}
+.faqlist details[open] summary:after{transform:rotate(-135deg)}
+.faqlist p{margin:0 0 24px;font-size:17px;line-height:1.65;color:var(--mut);max-width:70ch}
+.faqlist p a{color:var(--green);text-decoration:underline;text-underline-offset:3px}
+
+/* ---------- back to top ---------- */
+.totop{position:fixed;right:22px;bottom:22px;z-index:70;width:50px;height:50px;border:0;border-radius:50%;cursor:pointer;
+  background:linear-gradient(120deg,#4D8A3A,var(--green));color:#fff;display:grid;place-items:center;
+  box-shadow:0 14px 34px -12px rgba(20,35,26,.85);opacity:0;transform:translateY(14px);
+  transition:opacity .3s,transform .3s}
+.totop svg{width:19px;height:19px;stroke:#fff;fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.totop.show{opacity:1;transform:none}
+.totop:hover{transform:translateY(-3px)}
+
+@media (max-width:980px){
+  .shotgrid{grid-template-columns:repeat(2,1fr);gap:38px 26px}
+}
+@media (max-width:620px){
+  .burger{display:flex}
+  .ncta{padding:9px 15px;font-size:13.5px;white-space:nowrap}
+  nav .wrap{gap:12px}
+  .shotgrid{grid-template-columns:1fr;max-width:330px;margin:0 auto;gap:44px}
+  .faqlist summary{font-size:18px;padding-right:38px}
+  .totop{right:16px;bottom:16px;width:46px;height:46px}
+}
+
 /* ---------- accessibility layer ---------- */
 .skip{position:absolute;left:16px;top:-60px;z-index:200;background:#fff;color:var(--ink);font-weight:600;font-size:15px;
   padding:12px 18px;border-radius:10px;box-shadow:0 10px 30px -10px rgba(0,0,0,.6);transition:top .2s}
@@ -328,10 +402,23 @@ footer{background:#070D09;color:rgba(255,255,255,.66);padding:70px 0 40px;font-s
 <nav id="nav" aria-label="Primary"><div class="wrap">
   <a class="lock" href="#top"><img src="/assets/prano-mark.webp" width="28" height="38" alt=""><span class="lk"><b>PRANO</b><small>Know What Fuels You</small></span></a>
   <div class="nlinks">
-    <a href="#how">How it works</a><a href="#score">The score</a><a href="#features">Features</a><a href="#pricing">Pricing</a>
+    <a href="#how">How it works</a><a href="#score">The score</a><a href="#see">Screens</a><a href="#features">Features</a><a href="#pricing">Pricing</a>
   </div>
   <a class="ncta" href="#get">Get the app</a>
+  <button class="burger" id="burger" type="button" aria-expanded="false" aria-controls="mnav" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </button>
 </div></nav>
+<div class="mnav" id="mnav" hidden>
+  <a href="#how">How it works<small>Scan, score, why, swap</small></a>
+  <a href="#score">The score<small>Arithmetic, not a vibe</small></a>
+  <a href="#see">Screens<small>See the real app</small></a>
+  <a href="#features">Features<small>What you get</small></a>
+  <a href="#pricing">Pricing<small>Free, and Pro from $5/mo</small></a>
+  <a href="#faq">Questions<small>Before you download</small></a>
+  <a class="mcta" href="#get">Get the app</a>
+  <div class="mfoot"><a href="/support/">Support</a> · <a href="/privacy/">Privacy</a> · <a href="/terms/">Terms</a></div>
+</div>
 
 <!-- ================= HERO ================= -->
 <main id="main">
@@ -554,6 +641,51 @@ footer{background:#070D09;color:rgba(255,255,255,.66);padding:70px 0 40px;font-s
   </div>
 </section>
 
+
+<!-- ================= SCREENS ================= -->
+<section class="pad shots" id="see">
+  <div class="wrap">
+    <div class="shead rv">
+      <div class="eyebrow">See it in action</div>
+      <h2 class="dsp" style="margin-top:18px">Shelf to answer,<br>in six screens.</h2>
+      <p class="lead">Not a concept. These are the screens of the app going to the App Store —
+        the same score, the same reasoning, the same swaps you will get on your phone.</p>
+    </div>
+    <div class="shotgrid">
+      <figure class="shot rv">
+        <div class="frame"><img src="/assets/shots/scanner.webp" srcset="/assets/shots/scanner.webp 1x, /assets/shots/scanner@1.5x.webp 1.5x"
+          width="330" height="702" loading="lazy" decoding="async" alt="Prano app screen: point and scan"></div>
+        <figcaption><b>Point and scan</b><span>Barcode, nutrition label, a plate of food or a printed menu. The camera does the identifying.</span></figcaption>
+      </figure>
+      <figure class="shot rv">
+        <div class="frame"><img src="/assets/shots/scanresult.webp" srcset="/assets/shots/scanresult.webp 1x, /assets/shots/scanresult@1.5x.webp 1.5x"
+          width="330" height="702" loading="lazy" decoding="async" alt="Prano app screen: a number that is yours"></div>
+        <figcaption><b>A number that is yours</b><span>One score out of 100, the plain-English reason underneath, and the numbers that drove it.</span></figcaption>
+      </figure>
+      <figure class="shot rv">
+        <div class="frame"><img src="/assets/shots/ingredient.webp" srcset="/assets/shots/ingredient.webp 1x, /assets/shots/ingredient@1.5x.webp 1.5x"
+          width="330" height="702" loading="lazy" decoding="async" alt="Prano app screen: every ingredient, translated"></div>
+        <figcaption><b>Every ingredient, translated</b><span>What an additive actually is, why it is in there, and whether it matters for you.</span></figcaption>
+      </figure>
+      <figure class="shot rv">
+        <div class="frame"><img src="/assets/shots/discover.webp" srcset="/assets/shots/discover.webp 1x, /assets/shots/discover@1.5x.webp 1.5x"
+          width="330" height="702" loading="lazy" decoding="async" alt="Prano app screen: a better option, same shelf"></div>
+        <figcaption><b>A better option, same shelf</b><span>Alternatives ranked for your profile — with the ones you cannot eat marked, not hidden.</span></figcaption>
+      </figure>
+      <figure class="shot rv">
+        <div class="frame"><img src="/assets/shots/chat.webp" srcset="/assets/shots/chat.webp 1x, /assets/shots/chat@1.5x.webp 1.5x"
+          width="330" height="702" loading="lazy" decoding="async" alt="Prano app screen: ask it anything"></div>
+        <figcaption><b>Ask it anything</b><span>Ask Prano already knows your profile and the scan in front of you.</span></figcaption>
+      </figure>
+      <figure class="shot rv">
+        <div class="frame"><img src="/assets/shots/analytics.webp" srcset="/assets/shots/analytics.webp 1x, /assets/shots/analytics@1.5x.webp 1.5x"
+          width="330" height="702" loading="lazy" decoding="async" alt="Prano app screen: the pattern, not just the meal"></div>
+        <figcaption><b>The pattern, not just the meal</b><span>What is actually moving your scores, week to week.</span></figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
 <!-- ================= FEATURES ================= -->
 <section class="pad" id="features">
   <div class="wrap">
@@ -630,6 +762,47 @@ footer{background:#070D09;color:rgba(255,255,255,.66);padding:70px 0 40px;font-s
   </div>
 </section>
 
+
+<!-- ================= FAQ ================= -->
+<section class="pad" id="faq">
+  <div class="wrap">
+    <div class="shead rv">
+      <div class="eyebrow">Questions</div>
+      <h2 class="dsp" style="margin-top:18px">Before you<br>download it.</h2>
+    </div>
+    <div class="faqlist rv">
+        <details>
+          <summary>Is it really free?</summary>
+          <p>Scanning, the full personalised score and allergen flagging cost nothing, and there is no card to enter. Prano Pro — $7.99 a month or $59.99 a year, with a 7-day free trial — lifts the 15-a-day limit on Ask Prano questions and unlocks your full history and deeper analytics.</p>
+        </details>
+        <details>
+          <summary>What makes the score mine rather than generic?</summary>
+          <p>You tell Prano your goals, allergies, conditions and dietary style once. They are inputs to the arithmetic, not a disclaimer underneath it. The same jar of sauce can score 78 for one person and 31 for another, and Prano shows you exactly which input moved it.</p>
+        </details>
+        <details>
+          <summary>Does it work on restaurant food, not just packets?</summary>
+          <p>Yes. Barcode, nutrition label, a home-cooked plate or a printed menu — Prano reads all four, and tells you what it could not see rather than guessing quietly.</p>
+        </details>
+        <details>
+          <summary>Can I trust the number?</summary>
+          <p>It is computed the same way every time from what the label actually says, and it can be explained line by line. Where a value is not declared, Prano estimates it, says so, and lowers its own confidence. The AI writes the explanation underneath; it never moves the number.</p>
+        </details>
+        <details>
+          <summary>Can I rely on it for allergies?</summary>
+          <p>No — and we would rather say so plainly. Prano flags allergens it can find on the label, but a label can be wrong and cross-contamination is not on the label at all. Always check the pack yourself.</p>
+        </details>
+        <details>
+          <summary>What happens to my data?</summary>
+          <p>Your scans, photos and conversations are yours. We do not sell personal information and we do not use your content to train third-party AI models. You can delete a single scan, or your whole account, from inside the app or at <a href="/delete-account/">pranoapp.com/delete-account</a>.</p>
+        </details>
+        <details>
+          <summary>When does it launch?</summary>
+          <p>iPhone first. Leave your email below and you get one message the day it lands — no newsletter, no drip campaign.</p>
+        </details>
+    </div>
+  </div>
+</section>
+
 <!-- ================= CTA ================= -->
 <section class="ctaband" id="get">
   <div class="side"></div><div class="seam"></div><div class="grain"></div>
@@ -651,6 +824,10 @@ footer{background:#070D09;color:rgba(255,255,255,.66);padding:70px 0 40px;font-s
 
 </main>
 
+<button class="totop" id="totop" type="button" aria-label="Back to top">
+  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5"/><path d="M5 12l7-7 7 7"/></svg>
+</button>
+
 <!-- ================= FOOTER ================= -->
 <footer>
   <div class="wrap">
@@ -664,18 +841,39 @@ footer{background:#070D09;color:rgba(255,255,255,.66);padding:70px 0 40px;font-s
         <a class="lock" href="/" style="margin-bottom:16px"><img src="/assets/prano-mark.webp" width="28" height="38" alt=""><span class="lk"><b>PRANO</b><small>Know What Fuels You</small></span></a>
         <p style="margin:0;max-width:320px;font-size:14px;line-height:1.6">Built by Anantex.</p>
       </div>
-      <div><h2 class="fh">Product</h2><a href="#how">How it works</a><a href="#score">The score</a><a href="#features">Features</a><a href="#pricing">Pricing</a><a href="/app/">Get the app</a></div>
+      <div><h2 class="fh">Product</h2><a href="#how">How it works</a><a href="#score">The score</a><a href="#see">Screens</a><a href="#features">Features</a><a href="#pricing">Pricing</a><a href="#faq">Questions</a><a href="/app/">Get the app</a></div>
       <div><h2 class="fh">Company</h2><a href="/support/">Support</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a><a href="/delete-account/">Delete account</a></div>
       <div><h2 class="fh">Contact</h2><a href="mailto:support@pranoapp.com">support@pranoapp.com</a><a href="mailto:privacy@pranoapp.com">privacy@pranoapp.com</a></div>
     </div>
     <div class="fbot">
-      <span>© 2026 Sandhu Technologies LLC. All rights reserved.</span>
+      <span>© 2026 Anantex. All rights reserved.</span>
       <span>Apple and App Store are trademarks of Apple Inc.</span>
     </div>
   </div>
 </footer>
 
 <script>
+/* mobile menu */
+(function(){
+  const burger=document.getElementById('burger'), panel=document.getElementById('mnav');
+  const nav=document.getElementById('nav');
+  const open=v=>{panel.hidden=!v;burger.setAttribute('aria-expanded',v);burger.setAttribute('aria-label',v?'Close menu':'Open menu');
+    document.body.classList.toggle('locked',v); nav.classList.toggle('menuopen',v);
+    if(v){panel.querySelector('a').focus();} else {burger.focus();}};
+  burger.addEventListener('click',()=>open(panel.hidden));
+  panel.addEventListener('click',e=>{if(e.target.closest('a'))open(false);});
+  addEventListener('keydown',e=>{if(e.key==='Escape'&&!panel.hidden)open(false);});
+  addEventListener('resize',()=>{if(innerWidth>620&&!panel.hidden)open(false);});
+})();
+
+/* back to top */
+(function(){
+  const b=document.getElementById('totop');
+  addEventListener('scroll',()=>b.classList.toggle('show',scrollY>900),{passive:true});
+  b.addEventListener('click',()=>{const r=matchMedia('(prefers-reduced-motion: reduce)').matches;
+    scrollTo({top:0,behavior:r?'auto':'smooth'}); document.querySelector('nav .lock').focus({preventScroll:true});});
+})();
+
 /* nav state */
 const nv=document.getElementById('nav');
 addEventListener('scroll',()=>nv.classList.toggle('stuck',scrollY>70),{passive:true});
