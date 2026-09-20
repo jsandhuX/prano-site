@@ -1,0 +1,11 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.sandhutechnologies.prano",
+      "sha256_cert_fingerprints":
+        ["21:88:71:08:4A:EB:34:06:3D:F0:A6:70:04:C8:2D:79:B7:54:BE:4C:59:F1:D1:FD:DA:F1:10:17:C7:FB:40:6F"]
+    }
+  }
+]
