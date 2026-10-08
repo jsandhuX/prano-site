@@ -70,7 +70,9 @@ main.prose{max-width:780px;padding-top:64px;padding-bottom:96px}
 .prose a:hover{color:var(--green-dp);text-decoration-thickness:2px}
 .prose strong{font-weight:600;color:var(--txt)}
 .prose hr{border:0;border-top:1px solid var(--line);margin:44px 0}
-.prose table{border-collapse:collapse;width:100%;margin:20px 0;font-size:15px;display:block;overflow-x:auto}
+.prose{overflow-wrap:break-word}
+.prose code{word-break:break-word;overflow-wrap:anywhere;font-size:.94em;background:rgba(39,102,57,.07);padding:1px 5px;border-radius:5px}
+.prose table{border-collapse:collapse;width:100%;margin:20px 0;font-size:15px;display:block;overflow-x:auto;-webkit-overflow-scrolling:touch}
 .prose th,.prose td{border:1px solid var(--line);padding:9px 12px;text-align:left;vertical-align:top}
 .prose th{background:#fff;font-weight:600}
 .prose blockquote{margin:22px 0;padding:16px 20px;background:#fff;border-left:3px solid var(--cyan);border-radius:0 12px 12px 0}
