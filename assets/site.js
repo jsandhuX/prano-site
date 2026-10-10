@@ -25,3 +25,26 @@
     });
   }
 })();
+
+/* A table that scrolls sideways must be reachable by keyboard (WCAG 2.1.1),
+   and should say so to a screen reader rather than silently clipping. */
+(function () {
+  var tables = document.querySelectorAll('.prose table');
+  for (var i = 0; i < tables.length; i++) {
+    (function (t) {
+      var sync = function () {
+        if (t.scrollWidth > t.clientWidth + 1) {
+          t.setAttribute('tabindex', '0');
+          t.setAttribute('role', 'region');
+          if (!t.getAttribute('aria-label')) t.setAttribute('aria-label', 'Table, scrolls sideways');
+        } else {
+          t.removeAttribute('tabindex');
+          t.removeAttribute('role');
+          t.removeAttribute('aria-label');
+        }
+      };
+      sync();
+      addEventListener('resize', sync);
+    })(tables[i]);
+  }
+})();

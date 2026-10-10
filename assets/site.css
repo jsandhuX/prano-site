@@ -73,6 +73,15 @@ main.prose{max-width:780px;padding-top:64px;padding-bottom:96px}
 .prose{overflow-wrap:break-word}
 .prose code{word-break:break-word;overflow-wrap:anywhere;font-size:.94em;background:rgba(39,102,57,.07);padding:1px 5px;border-radius:5px}
 .prose table{border-collapse:collapse;width:100%;margin:20px 0;font-size:15px;display:block;overflow-x:auto;-webkit-overflow-scrolling:touch}
+.prose table:focus-visible{outline:2.5px solid var(--green);outline-offset:3px}
+@media (max-width:620px){
+  .prose table{font-size:13.5px}
+  .prose th,.prose td{padding:7px 9px}
+}
+@media (max-width:400px){
+  .prose table{font-size:12.5px}
+  .prose th,.prose td{padding:6px 7px}
+}
 .prose th,.prose td{border:1px solid var(--line);padding:9px 12px;text-align:left;vertical-align:top}
 .prose th{background:#fff;font-weight:600}
 .prose blockquote{margin:22px 0;padding:16px 20px;background:#fff;border-left:3px solid var(--cyan);border-radius:0 12px 12px 0}
