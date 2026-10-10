@@ -2,18 +2,21 @@
 (function () {
   var burger = document.getElementById('burger'), panel = document.getElementById('mnav'), nav = document.querySelector('.snav');
   if (burger && panel) {
+    var lockY = 0;
     var open = function (v) {
+      if (v) { lockY = window.scrollY; document.body.style.top = (-lockY) + 'px'; }
       panel.hidden = !v;
       burger.setAttribute('aria-expanded', v);
       burger.setAttribute('aria-label', v ? 'Close menu' : 'Open menu');
       document.body.classList.toggle('locked', v);
       if (nav) nav.classList.toggle('menuopen', v);
-      if (v) { panel.querySelector('a').focus(); } else { burger.focus(); }
+      if (!v) { document.body.style.top = ''; window.scrollTo(0, lockY); }
+      if (v) { panel.querySelector('a').focus(); } else { burger.focus({ preventScroll: true }); }
     };
     burger.addEventListener('click', function () { open(panel.hidden); });
     panel.addEventListener('click', function (e) { if (e.target.closest('a')) open(false); });
     addEventListener('keydown', function (e) { if (e.key === 'Escape' && !panel.hidden) open(false); });
-    addEventListener('resize', function () { if (innerWidth > 620 && !panel.hidden) open(false); });
+    addEventListener('resize', function () { if (innerWidth > 820 && !panel.hidden) open(false); });
   }
   var top = document.getElementById('totop');
   if (top) {
