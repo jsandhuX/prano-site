@@ -28,6 +28,8 @@
 <link rel="manifest" href="/site.webmanifest">
 <link rel="preload" href="/assets/fonts/outfit-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/assets/fonts/fraunces-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/shots/hero.webp" as="image" type="image/webp"
+      imagesrcset="/assets/shots/hero.webp 1x, /assets/shots/hero@1.5x.webp 1.5x" fetchpriority="high">
 <script>document.documentElement.classList.add('js')</script>
 <script type="application/ld+json">[{"@context":"https://schema.org","@type":"Organization","@id":"https://pranoapp.com/#org","name":"Anantex","legalName":"Sandhu Technologies LLC","url":"https://pranoapp.com/","email":"contact@anantex.com","logo":"https://pranoapp.com/assets/icon-512.png"},{"@context":"https://schema.org","@type":"WebSite","@id":"https://pranoapp.com/#website","name":"Prano","url":"https://pranoapp.com/","publisher":{"@id":"https://pranoapp.com/#org"}},{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Prano: AI Food Scanner","alternateName":"Prano","url":"https://pranoapp.com/","applicationCategory":"HealthApplication","operatingSystem":"iOS","description":"Scan a barcode, a label or your plate and get a 0-100 food score personalised to your goals, allergies and conditions, with a plain-English explanation and a better swap. Barcode scans and allergen checks are free and unlimited, for everyone in your family.","image":"https://pranoapp.com/assets/og/og-home.jpg","publisher":{"@id":"https://pranoapp.com/#org"},"offers":[{"@type":"Offer","name":"Free","price":"0","priceCurrency":"USD"},{"@type":"Offer","name":"Prano Pro — Monthly","price":"7.99","priceCurrency":"USD"},{"@type":"Offer","name":"Prano Pro — Yearly","price":"59.99","priceCurrency":"USD"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is it really free?","acceptedAnswer":{"@type":"Answer","text":"Barcode scans are unlimited and free, and so are allergen checks — for you and for everyone you add, however many that is. The free plan also includes 3 label or meal photo scans a day, personal scores for you and one other person, and 5 Ask Prano questions a day. There is no card to enter. Prano Pro — $7.99 a month or $59.99 a year, with a 7-day free trial — removes the photo and question limits, scores up to 6 people, and unlocks your full history and deeper analytics."}},{"@type":"Question","name":"What makes the score mine rather than generic?","acceptedAnswer":{"@type":"Answer","text":"You tell Prano your goals, allergies, conditions and dietary style once. They are inputs to the arithmetic, not a disclaimer underneath it. The same jar of sauce can score 78 for one person and 31 for another, and Prano shows you exactly which input moved it."}},{"@type":"Question","name":"Can I use it for my whole family?","acceptedAnswer":{"@type":"Answer","text":"Yes, and the part that matters for safety costs nothing. Add everyone you cook for and their allergens are checked on every single scan, free, however many people you add — the result says plainly also contains milk, on Raj’s profile. The personal 0–100 score is the part that is limited: free covers you and one other person, Pro scores up to six."}},{"@type":"Question","name":"Does it work on restaurant food, not just packets?","acceptedAnswer":{"@type":"Answer","text":"Yes. Barcode, nutrition label, a home-cooked plate or a printed menu — Prano reads all four, and tells you what it could not see rather than guessing quietly. Barcode scans are unlimited; reading a photo takes an AI call, so the free plan includes three a day and Pro removes the limit."}},{"@type":"Question","name":"Can I trust the number?","acceptedAnswer":{"@type":"Answer","text":"It is computed the same way every time from what the label actually says, and it can be explained line by line. Where a value is not declared, Prano estimates it, says so, and lowers its own confidence. The AI writes the explanation underneath; it never moves the number."}},{"@type":"Question","name":"Can I rely on it for allergies?","acceptedAnswer":{"@type":"Answer","text":"No — and we would rather say so plainly. Prano flags allergens it can find on the label, but a label can be wrong and cross-contamination is not on the label at all. Always check the pack yourself."}},{"@type":"Question","name":"What happens to my data?","acceptedAnswer":{"@type":"Answer","text":"Your scans, photos and conversations are yours. We do not sell personal information and we do not use your content to train third-party AI models. You can delete a single scan, or your whole account, from inside the app or at pranoapp.com/delete-account."}},{"@type":"Question","name":"When does it launch?","acceptedAnswer":{"@type":"Answer","text":"iPhone first. Leave your email below and you get one message the day it lands — no newsletter, no drip campaign."}}]}]</script>
 <style>
@@ -129,21 +131,13 @@ h1.dsp .gr{background:linear-gradient(104deg,var(--leaf-lt) 8%,var(--cyan-lt) 92
 .phwrap{display:flex;justify-content:center;position:relative}
 .phglow{position:absolute;width:min(400px,84vw);height:min(400px,84vw);border-radius:50%;top:50%;left:50%;transform:translate(-50%,-50%);
   pointer-events:none;background:radial-gradient(circle,rgba(68,168,195,.3),transparent 65%);filter:blur(46px)}
-.phone{position:relative;width:318px;height:646px;border-radius:44px;background:#0d1712;
+.phshot{display:block;width:100%;height:100%;object-fit:cover;object-position:top center;border-radius:36px}
+.phone{position:relative;width:318px;height:690px;border-radius:44px;background:#0d1712;
   border:8px solid #2b3a32;box-shadow:0 50px 90px -30px rgba(0,0,0,.9),0 0 0 1px rgba(255,255,255,.16),0 0 60px -18px rgba(111,211,228,.28);
   overflow:hidden;display:flex;flex-direction:column;z-index:2}
 .phone.float{animation:fl 7s ease-in-out infinite}
 @keyframes fl{0%,100%{transform:translateY(0)}50%{transform:translateY(-13px)}}
-.notch{position:absolute;top:0;left:50%;transform:translateX(-50%);width:108px;height:26px;background:#2b3a32;
-  border-radius:0 0 15px 15px;z-index:6}
 .screen{flex:1;background:#fff;display:flex;flex-direction:column;overflow:hidden;color:var(--txt);font-size:14px}
-.sbar{display:flex;justify-content:space-between;padding:11px 20px 5px;font-size:11px;font-weight:600;color:#14231A;flex:none}
-.sbody{flex:1;overflow:hidden;padding:4px 17px 0}
-.tabbar{display:flex;justify-content:space-around;padding:9px 0 16px;border-top:1px solid #E9E5DA;background:#fff;flex:none}
-.tab{display:flex;flex-direction:column;align-items:center;gap:3px;font-size:9px;color:#66756C;font-weight:500}
-.tab.on{color:var(--green);font-weight:700}
-.tab svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
-.tab.on svg{stroke-width:2.3}
 
 /* ---------- marquee band ---------- */
 .band{background:var(--paper);border-top:1px solid var(--line);border-bottom:1px solid var(--line);
@@ -406,7 +400,7 @@ body.locked{position:fixed;left:0;right:0;width:100%;overflow:hidden}
 @media (max-width:520px){
   .form{flex-direction:column}
   .fgrd{grid-template-columns:1fr}
-  .phone{width:288px;height:592px}
+  .phone{width:288px;height:623px}
 }
 @media (max-width:400px){
   .wrap{padding:0 14px}
@@ -418,7 +412,7 @@ body.locked{position:fixed;left:0;right:0;width:100%;overflow:hidden}
 }
 @media (max-width:340px){
   nav .ncta{display:none}
-  .phone{width:246px;height:506px;border-width:6px;border-radius:36px}
+  .phone{width:246px;height:534px;border-width:6px;border-radius:36px}
   .shotgrid{max-width:246px}
 }
 
@@ -517,59 +511,15 @@ body.locked{position:fixed;left:0;right:0;width:100%;overflow:hidden}
     </div>
 
     <div class="phwrap" aria-hidden="true">
-      <div class="phglow"></div>
-      <div class="phone float">
-        <div class="notch"></div>
-        <div class="screen">
-          <div class="sbar"><span>9:41</span><span>●●● ᯤ ▮</span></div>
-          <div class="sbody">
-            <div style="display:flex;justify-content:space-between;align-items:baseline;margin:6px 0 2px">
-              <b style="font-family:'Fraunces',serif;font-size:19px;letter-spacing:-.02em">Rolled oats</b>
-              <span style="font-size:11px;color:#5E6D63">Just now</span>
-            </div>
-            <div style="font-size:11.5px;color:#5E6D63;margin-bottom:12px">Wholegrain · 500g</div>
-            <div style="display:flex;justify-content:center;margin:6px 0 10px">
-              <div style="position:relative;width:148px;height:148px">
-                <svg width="148" height="148" viewBox="0 0 148 148" style="transform:rotate(-90deg)">
-                  <defs><linearGradient id="hg" x1="0" y1="0" x2="1" y2="1">
-                    <stop offset="0" stop-color="#74AA4C"/><stop offset="1" stop-color="#44A8C3"/></linearGradient></defs>
-                  <circle cx="74" cy="74" r="62" fill="none" stroke="#EDEAE1" stroke-width="12"/>
-                  <circle id="hRing" cx="74" cy="74" r="62" fill="none" stroke="url(#hg)" stroke-width="12"
-                    stroke-linecap="round" stroke-dasharray="389.6" stroke-dashoffset="389.6"
-                    style="transition:stroke-dashoffset 1.6s cubic-bezier(.2,.8,.3,1)"/>
-                </svg>
-                <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center">
-                  <b id="hNum" style="font-family:'Fraunces',serif;font-size:44px;letter-spacing:-.04em;line-height:1;color:#276639;display:inline-block;min-width:2.1ch;text-align:center;font-variant-numeric:tabular-nums;font-feature-settings:'tnum' 1">0</b>
-                  <span style="font-size:8.5px;letter-spacing:.2em;color:#5E6D63;margin-top:3px;font-weight:600">OUT OF 100</span>
-                </div>
-              </div>
-            </div>
-            <div style="text-align:center;font-family:'Fraunces',serif;font-weight:700;font-size:17px;color:#276639;letter-spacing:-.02em">Good for you</div>
-            <div style="text-align:center;font-size:10.5px;color:#5E6D63;margin:3px 0 13px">Personalised to your profile</div>
-            <div style="border:1px solid #E9E5DA;border-radius:13px;overflow:hidden;background:#FBFAF6">
-              <div style="display:flex;justify-content:space-between;padding:9px 13px;font-size:12.5px;border-bottom:1px solid #EFECE3"><span>Added sugar</span><b style="color:#2A7A47;font-size:11px">None</b></div>
-              <div style="display:flex;justify-content:space-between;padding:9px 13px;font-size:12.5px;border-bottom:1px solid #EFECE3"><span>Fibre</span><b style="color:#2A7A47;font-size:11px">High · 10g</b></div>
-              <div style="display:flex;justify-content:space-between;padding:9px 13px;font-size:12.5px;border-bottom:1px solid #EFECE3"><span>Sodium</span><b style="color:#2A7A47;font-size:11px">Low · 5mg</b></div>
-              <div style="display:flex;justify-content:space-between;padding:9px 13px;font-size:12.5px;border-bottom:1px solid #EFECE3"><span>Processing</span><b style="color:#98680F;font-size:11px">NOVA 2</b></div>
-              <div style="display:flex;justify-content:space-between;padding:9px 13px;font-size:12.5px"><span>Your allergens</span><b style="color:#2A7A47;font-size:11px">None found</b></div>
-            </div>
-            <div style="margin-top:11px;border-radius:13px;background:#F1F6F0;padding:12px 14px">
-              <b style="font-size:12px">Why this score</b>
-              <p style="margin:5px 0 0;font-size:11.5px;line-height:1.55;color:#5E6D63">Wholegrain, no added sugar, 10g fibre — good for the steady-energy goal. Buy certified gluten-free.</p>
-            </div>
-          </div>
-          <div class="tabbar">
-              <div class="tab on"><svg viewBox="0 0 24 24"><path d="M3 10.5 12 3l9 7.5"/><path d="M5.5 9.5V20h13V9.5"/><path d="M9.5 20v-6h5v6"/></svg>Home</div>
-              <div class="tab"><svg viewBox="0 0 24 24"><path d="M4 5.5A1.5 1.5 0 0 1 5.5 4H19v16H5.5A1.5 1.5 0 0 1 4 18.5Z"/><path d="M8 8.5h7"/><path d="M8 12h7"/></svg>Learn</div>
-              <div class="tab"><svg viewBox="0 0 24 24"><path d="M3 8V5.5A2.5 2.5 0 0 1 5.5 3H8"/><path d="M16 3h2.5A2.5 2.5 0 0 1 21 5.5V8"/><path d="M21 16v2.5a2.5 2.5 0 0 1-2.5 2.5H16"/><path d="M8 21H5.5A2.5 2.5 0 0 1 3 18.5V16"/><path d="M3.5 12h17"/></svg>Scan</div>
-              <div class="tab"><svg viewBox="0 0 24 24"><circle cx="9" cy="8.4" r="3.1"/><path d="M2.8 19.4a6.2 6.2 0 0 1 12.4 0"/><path d="M16.6 5.6a3.1 3.1 0 0 1 0 5.6"/><path d="M18.4 14.2a6.2 6.2 0 0 1 2.8 5.2"/></svg>Family</div>
-              <div class="tab"><svg viewBox="0 0 24 24"><path d="M4 19V9"/><path d="M10 19V5"/><path d="M16 19v-7"/><path d="M22 19V3"/></svg>Insights</div>
-            </div>
-          </div>
+        <div class="phglow"></div>
+        <div class="phone float">
+          <img class="phshot" src="/assets/shots/hero.webp"
+               srcset="/assets/shots/hero.webp 1x, /assets/shots/hero@1.5x.webp 1.5x"
+               width="302" height="674" fetchpriority="high" decoding="async" alt="">
         </div>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
 <!-- ================= SLOGAN BAND ================= -->
 <div class="band" aria-hidden="true">
@@ -593,18 +543,9 @@ body.locked{position:fixed;left:0;right:0;width:100%;overflow:hidden}
     <div class="story">
       <div class="stick" aria-hidden="true">
         <div class="phone">
-          <div class="notch"></div>
-          <div class="screen">
-            <div class="sbar"><span>9:41</span><span>●●● ᯤ ▮</span></div>
-            <div class="sbody" id="storyBody"></div>
-            <div class="tabbar">
-              <div class="tab on"><svg viewBox="0 0 24 24"><path d="M3 10.5 12 3l9 7.5"/><path d="M5.5 9.5V20h13V9.5"/><path d="M9.5 20v-6h5v6"/></svg>Home</div>
-              <div class="tab"><svg viewBox="0 0 24 24"><path d="M4 5.5A1.5 1.5 0 0 1 5.5 4H19v16H5.5A1.5 1.5 0 0 1 4 18.5Z"/><path d="M8 8.5h7"/><path d="M8 12h7"/></svg>Learn</div>
-              <div class="tab"><svg viewBox="0 0 24 24"><path d="M3 8V5.5A2.5 2.5 0 0 1 5.5 3H8"/><path d="M16 3h2.5A2.5 2.5 0 0 1 21 5.5V8"/><path d="M21 16v2.5a2.5 2.5 0 0 1-2.5 2.5H16"/><path d="M8 21H5.5A2.5 2.5 0 0 1 3 18.5V16"/><path d="M3.5 12h17"/></svg>Scan</div>
-              <div class="tab"><svg viewBox="0 0 24 24"><circle cx="9" cy="8.4" r="3.1"/><path d="M2.8 19.4a6.2 6.2 0 0 1 12.4 0"/><path d="M16.6 5.6a3.1 3.1 0 0 1 0 5.6"/><path d="M18.4 14.2a6.2 6.2 0 0 1 2.8 5.2"/></svg>Family</div>
-              <div class="tab"><svg viewBox="0 0 24 24"><path d="M4 19V9"/><path d="M10 19V5"/><path d="M16 19v-7"/><path d="M22 19V3"/></svg>Insights</div>
-            </div>
-          </div>
+          <img class="phshot" id="storyShot" src="/assets/shots/story-scan.webp"
+               srcset="/assets/shots/story-scan.webp 1x, /assets/shots/story-scan@1.5x.webp 1.5x"
+               width="302" height="674" loading="lazy" decoding="async" alt="">
         </div>
       </div>
       <div class="steps" id="steps">
@@ -980,9 +921,6 @@ document.querySelectorAll('.rv').forEach(e=>ro.observe(e));
 function count(el,to,ms){const t0=performance.now();
   (function f(t){const p=Math.min(1,(t-t0)/ms);el.textContent=Math.round(to*(1-Math.pow(1-p,3)));if(p<1)requestAnimationFrame(f)})(t0);}
 
-/* hero ring */
-setTimeout(()=>{const C=2*Math.PI*62;document.getElementById('hRing').style.strokeDashoffset=C-C*82/100;
-  count(document.getElementById('hNum'),82,1500);},450);
 
 /* big ring on view */
 const brO=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){
@@ -991,66 +929,16 @@ const brO=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){
 brO.observe(document.getElementById('bigring'));
 
 /* story phone */
-const SC=[
-`<div style="text-align:center;padding-top:8px"><b style="font-family:'Fraunces',serif;font-size:18px;letter-spacing:-.02em">Point and scan</b>
- <div style="font-size:11.5px;color:#5E6D63;margin-top:3px">Barcode · label · plate · menu</div></div>
- <div style="margin-top:14px;border-radius:16px;background:#0E1A13;height:250px;position:relative;overflow:hidden">
-   <div style="position:absolute;inset:36px;border-radius:12px;border:2px solid rgba(155,208,112,.55)"></div>
-   <div style="position:absolute;left:36px;right:36px;top:50%;height:2px;background:linear-gradient(90deg,transparent,#9BD070,transparent);box-shadow:0 0 12px #9BD070"></div>
-   <div style="position:absolute;left:0;right:0;bottom:16px;text-align:center;color:rgba(255,255,255,.6);font-size:11px">Hold steady — reading barcode</div>
- </div>
- <div style="display:flex;gap:7px;margin-top:12px">
-   <div style="flex:1;text-align:center;border-radius:10px;background:#276639;color:#fff;padding:9px 0;font-size:11px;font-weight:600">Barcode</div>
-   <div style="flex:1;text-align:center;border-radius:10px;background:#F1F0EA;padding:9px 0;font-size:11px">Label</div>
-   <div style="flex:1;text-align:center;border-radius:10px;background:#F1F0EA;padding:9px 0;font-size:11px">Plate</div>
-   <div style="flex:1;text-align:center;border-radius:10px;background:#F1F0EA;padding:9px 0;font-size:11px">Menu</div>
- </div>`,
-`<div style="margin:8px 0 2px"><b style="font-family:'Fraunces',serif;font-size:18px;letter-spacing:-.02em">Tomato pasta sauce</b>
- <div style="font-size:11.5px;color:#5E6D63">Same jar · two people</div></div>
- <div style="display:flex;gap:9px;margin-top:14px">
-   <div style="flex:1;border:1px solid #E9E5DA;border-radius:14px;padding:14px 12px;text-align:center;background:#F3F8F2">
-     <div style="font-family:'Fraunces',serif;font-size:36px;color:#2A7A47;letter-spacing:-.04em;line-height:1">78</div>
-     <div style="font-size:9.5px;color:#5E6D63;margin-top:5px;letter-spacing:.1em">MAYA</div>
-     <div style="font-size:11px;margin-top:7px;color:#2A7A47;font-weight:600">Good for you</div>
-     <div style="font-size:10.5px;color:#5E6D63;margin-top:4px;line-height:1.4">No restrictions.<br>Low-sodium goal.</div>
-   </div>
-   <div style="flex:1;border:1px solid #E9E5DA;border-radius:14px;padding:14px 12px;text-align:center;background:#FBF2F0">
-     <div style="font-family:'Fraunces',serif;font-size:36px;color:#B0402E;letter-spacing:-.04em;line-height:1">31</div>
-     <div style="font-size:9.5px;color:#5E6D63;margin-top:5px;letter-spacing:.1em">ALEX</div>
-     <div style="font-size:11px;margin-top:7px;color:#B0402E;font-weight:600">Avoid</div>
-     <div style="font-size:10.5px;color:#5E6D63;margin-top:4px;line-height:1.4">Hypertension.<br>620mg per serving.</div>
-   </div>
- </div>
- <div style="margin-top:13px;border-radius:13px;background:#F1F6F0;padding:12px 14px">
-   <b style="font-size:12px">One label. Two answers.</b>
-   <p style="margin:5px 0 0;font-size:11.5px;line-height:1.55;color:#5E6D63">Sodium is 26% of Alex's daily ceiling in one serving, which triggers a structural cap. For Maya it is unremarkable.</p>
- </div>`,
-`<div style="margin:8px 0 12px"><b style="font-family:'Fraunces',serif;font-size:18px;letter-spacing:-.02em">Ask Prano</b>
- <div style="font-size:11.5px;color:#5E6D63">Knows your profile and last scan</div></div>
- <div style="background:#F1F0EA;border-radius:14px 14px 14px 5px;padding:11px 13px;font-size:12px;line-height:1.5">You scored this 31. Want to know why, or want a swap?</div>
- <div style="background:#276639;color:#fff;border-radius:14px 14px 5px 14px;padding:11px 13px;font-size:12px;margin:9px 0 9px auto;width:78%;line-height:1.5">Why is it so low? It looks healthy.</div>
- <div style="background:#F1F0EA;border-radius:14px 14px 14px 5px;padding:11px 13px;font-size:12px;line-height:1.55">
-   It is a decent sauce. The problem is specific to you: <b>620mg sodium per serving</b> is 26% of your daily ceiling, and your profile flags hypertension.
-   That trips a structural cap at 39 — nothing else about the jar can lift it above that.
-   <div style="margin-top:7px">Two jars on the same shelf come in under 200mg.</div>
- </div>`,
-`<div style="margin:8px 0 12px"><b style="font-family:'Fraunces',serif;font-size:18px;letter-spacing:-.02em">Better on the same shelf</b>
- <div style="font-size:11.5px;color:#5E6D63">Ranked for your profile</div></div>
- ${[['Passata, no salt added','86','−580mg sodium'],['Fresh basil sauce','79','−410mg sodium'],['Cherry tomato sugo','74','−350mg sodium']].map(([n,s,d],i)=>`
- <div style="display:flex;align-items:center;gap:11px;border:1px solid #E9E5DA;border-radius:13px;padding:11px 13px;margin-bottom:8px;background:${i===0?'#F3F8F2':'#fff'}">
-   <div style="width:40px;height:40px;border-radius:11px;background:#E8F1E6;display:grid;place-items:center;font-family:'Fraunces',serif;font-size:17px;color:#276639;font-weight:700">${s}</div>
-   <div style="flex:1"><div style="font-size:12.5px;font-weight:600">${n}</div><div style="font-size:10.5px;color:#2A7A47;margin-top:2px">${d}</div></div>
-   <span style="color:#C3CCC6">›</span>
- </div>`).join('')}
- <div style="margin-top:6px;border-radius:13px;background:#F1F6F0;padding:12px 14px">
-   <p style="margin:0;font-size:11.5px;line-height:1.55;color:#5E6D63">Switching to the first one moves this meal from <b>Avoid</b> to <b>Good for you</b> without changing anything else you eat.</p>
- </div>`];
-const sBody=document.getElementById('storyBody');
+const SHOTS=['story-scan','story-score','story-why','story-swap'];
+const shot=document.getElementById('storyShot');
 let cur=-1;
-function setStory(i){if(i===cur)return;cur=i;sBody.style.opacity=0;
-  setTimeout(()=>{sBody.innerHTML=SC[i];sBody.style.opacity=1;},170);}
-sBody.style.transition='opacity .2s';
-setStory(0);
+function setStory(i){if(i===cur||!shot)return;cur=i;
+  shot.style.opacity=0;
+  setTimeout(()=>{const n=SHOTS[i];
+    shot.src='/assets/shots/'+n+'.webp';
+    shot.srcset='/assets/shots/'+n+'.webp 1x, /assets/shots/'+n+'@1.5x.webp 1.5x';
+    shot.style.opacity=1;},170);}
+if(shot){shot.style.transition='opacity .2s';}
 const stO=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){
   document.querySelectorAll('.step').forEach(s=>s.classList.remove('on'));
   e.target.classList.add('on');setStory(+e.target.dataset.s);}})},{rootMargin:'-45% 0px -45% 0px'});
